@@ -10,7 +10,7 @@ import { DialogManagerService } from '../../../services/dialog-manager.service';
 import { YesNoDialogComponent } from '../../../commons/components/yes-no-dialog/yes-no-dialog.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
-// import { CustomPaginator } from './custom-paginator';
+import { CustomPaginator } from './custom-paginator';
 
 @Component({
   selector: 'app-client-table',
@@ -19,7 +19,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   styleUrl: './client-table.component.css',
   providers: [
     { provide: SERVICES_TOKEN.DIALOG, useClass: DialogManagerService },
-    // { provide: MatPaginatorIntl, useClass: CustomPaginator }
+    { provide: MatPaginatorIntl, useClass: CustomPaginator }
   ]
 })
 export class ClientTableComponent implements AfterViewInit, OnChanges, OnDestroy {
