@@ -13,7 +13,7 @@ import { ClientTableComponent } from '../components/client-table/client-table.co
   selector: 'app-list-clients',
   imports: [ClientTableComponent],
   templateUrl: './list-clients.component.html',
-  styleUrl: './list-clients.component.scss',
+  styleUrl: './list-clients.component.css',
   providers: [
     { provide: SERVICES_TOKEN.HTTP.CLIENT, useClass: ClientsService },
     // { provide: SERVICES_TOKEN.SNACKBAR, useClass: SnackbarManagerService }

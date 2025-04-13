@@ -13,7 +13,7 @@ import { ClientFormComponent } from '../components/client-form/client-form.compo
   selector: 'app-new-client',
   imports: [ClientFormComponent],
   templateUrl: './new-client.component.html',
-  styleUrl: './new-client.component.scss',
+  styleUrl: './new-client.component.css',
   providers: [
     { provide: SERVICES_TOKEN.HTTP.CLIENT, useClass: ClientsService },
     { provide: SERVICES_TOKEN.SNACKBAR, useClass: SnackbarManagerService }

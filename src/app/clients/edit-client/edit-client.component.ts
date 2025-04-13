@@ -13,7 +13,7 @@ import { ClientFormComponent } from '../components/client-form/client-form.compo
   selector: 'app-edit-client',
   imports: [ClientFormComponent],
   templateUrl: './edit-client.component.html',
-  styleUrl: './edit-client.component.scss',
+  styleUrl: './edit-client.component.css',
   providers: [
     { provide: SERVICES_TOKEN.HTTP.CLIENT, useClass: ClientsService },
     // { provide: SERVICES_TOKEN.SNACKBAR, useClass: SnackbarManagerService }
