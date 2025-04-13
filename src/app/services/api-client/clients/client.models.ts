@@ -1,31 +1,16 @@
-export interface ClientModelForm {
-    id?: number
-    name: string
-    email: string
-    phone: string
-}
-
-export interface ClientModelTable {
-    id: number
-    name: string
-    email: string
-    phone: string
-}
-
 export interface SaveClientRequest {
     name: string
     email: string
     phone: string
 }
 
-export interface SaveClientResponse {
-    id: number
+export interface UpdateClientRequest {
     name: string
     email: string
     phone: string
 }
 
-export interface UpdateClientRequest {
+export interface SaveClientResponse {
     id: number
     name: string
     email: string
@@ -39,13 +24,16 @@ export interface UpdateClientResponse {
     phone: string
 }
 
-export interface DetailClientResponse {
+export interface ListClientResponse {
     id: number
     name: string
     email: string
     phone: string
 }
 
-export interface ListClientResponse {
-    clients: ClientModelTable[]
+export interface DetailClientResponse {
+    id: number
+    name: string
+    email: string
+    phone: string
 }
