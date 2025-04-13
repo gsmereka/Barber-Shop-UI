@@ -17,7 +17,7 @@ import { SaveScheduleRequest } from '../../services/api-client/schedules/schedul
   templateUrl: './schedules-month.component.html',
   styleUrl: './schedules-month.component.css',
   providers: [
-    // { provide: SERVICES_TOKEN.HTTP.SCHEDULE, useClass: SchedulesService },
+    { provide: SERVICES_TOKEN.HTTP.SCHEDULE, useClass: SchedulesService },
     { provide: SERVICES_TOKEN.HTTP.CLIENT, useClass: ClientsService },
     { provide: SERVICES_TOKEN.SNACKBAR, useClass: SnackbarManagerService }
   ]
@@ -31,7 +31,7 @@ export class SchedulesMonthComponent implements OnInit, OnDestroy {
   clients: SelectClientModel[] = []
 
   constructor(
-    // @Inject(SERVICES_TOKEN.HTTP.SCHEDULE) private readonly httpService: IScheduleService,
+    @Inject(SERVICES_TOKEN.HTTP.SCHEDULE) private readonly httpService: IScheduleService,
     @Inject(SERVICES_TOKEN.HTTP.CLIENT) private readonly clientHttpService: ICLientService,
     @Inject(SERVICES_TOKEN.SNACKBAR) private readonly snackbarManage: ISnackbarManagerService
   ) { }
@@ -51,25 +51,25 @@ export class SchedulesMonthComponent implements OnInit, OnDestroy {
   }
 
   onConfirmDelete(schedule: ClientScheduleAppointmentModel) {
-    // this.subscriptions.push(this.httpService.delete(schedule.id).subscribe())
+    this.subscriptions.push(this.httpService.delete(schedule.id).subscribe())
   }
 
   onScheduleClient(schedule: SaveScheduleModel) {
-    // if (schedule.startAt && schedule.endAt && schedule.clientId) {
-    //   const request: SaveScheduleRequest = { startAt: schedule.startAt, endAt: schedule.endAt, clientId: schedule.clientId }
-    //   this.subscriptions.push(this.httpService.save(request).subscribe(() => {
-    //     this.snackbarManage.show('Agendamento realizado com sucesso')
-    //     if (this.selectedDate) {
-    //       this.fetchSchedules(this.selectedDate)
-    //     }
-    //   }))
-    // }
+    if (schedule.startAt && schedule.endAt && schedule.clientId) {
+      const request: SaveScheduleRequest = { startAt: schedule.startAt, endAt: schedule.endAt, clientId: schedule.clientId }
+      this.subscriptions.push(this.httpService.save(request).subscribe(() => {
+        this.snackbarManage.show('Agendamento realizado com sucesso')
+        if (this.selectedDate) {
+          this.fetchSchedules(this.selectedDate)
+        }
+      }))
+    }
   }
 
   private fetchSchedules(currentDate: Date) {
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth() + 1;
-    // this.subscriptions.push(this.httpService.listInMonth(year, month).subscribe(data => this.monthSchedule = data));
+    this.subscriptions.push(this.httpService.listInMonth(year, month).subscribe(data => this.monthSchedule = data));
   }
 
 }
