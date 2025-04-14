@@ -103,24 +103,33 @@ export class ScheduleCalendarComponent implements OnDestroy, AfterViewInit, OnCh
   }
 
   onSubmit(form: NgForm) {
-    const startAt = new Date(this._selected)
-    const endAt = new Date(this._selected)
-    startAt.setHours(this.newSchedule.startAt!.getHours(), this.newSchedule.startAt!.getMinutes())
-    endAt.setHours(this.newSchedule.endAt!.getHours(), this.newSchedule.endAt!.getMinutes())
+    if (!this.newSchedule.startAt || !this.newSchedule.endAt || !this.newSchedule.clientId) {
+      console.error('Horário de início, término ou cliente não definido.');
+      return;
+    }
+  
+    const startAt = new Date(this._selected);
+    const endAt = new Date(this._selected);
+  
+    startAt.setHours(this.newSchedule.startAt.getHours(), this.newSchedule.startAt.getMinutes());
+    endAt.setHours(this.newSchedule.endAt.getHours(), this.newSchedule.endAt.getMinutes());
+  
     const saved: ClientScheduleAppointmentModel = {
       id: -1,
       day: this._selected.getDate(),
       startAt,
       endAt,
-      clientId: this.newSchedule.clientId!,
-      clientName: this.clients.find(c => c.id === this.newSchedule.clientId!)!.name
-    }
-    this.monthSchedule.scheduledAppointments.push(saved)
-    this.onScheduleClient.emit(saved)
-    this.buildTable()
-    form.resetForm()
-    this.newSchedule = { startAt: undefined, endAt: undefined, clientId: undefined }
+      clientId: this.newSchedule.clientId,
+      clientName: this.clients.find(c => c.id === this.newSchedule.clientId)!.name
+    };
+  
+    this.monthSchedule.scheduledAppointments.push(saved);
+    this.onScheduleClient.emit(saved);
+    this.buildTable();
+    form.resetForm();
+    this.newSchedule = { startAt: undefined, endAt: undefined, clientId: undefined };
   }
+  
 
   requestDelete(schedule: ClientScheduleAppointmentModel) {
     this.subscription = this.dialogManagerService.showYesNoDialog(
